@@ -1,0 +1,32 @@
+
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400, 500');
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14px;
+}
+
+h1{
+    margin: 0;
+    padding: 0;
+}
+.login-form{
+    padding: 15px;
+    border-radius: 5px;
+
+    background-color: #ececec;
+}
+
+.login-form a{
+    text-decoration: none;
+}
+
+.modal-dialog{
+    margin-top: 150px;
+}
