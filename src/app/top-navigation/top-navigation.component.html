@@ -1,0 +1,167 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">{{brand}}</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarDropdown">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="admin">Admin</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Buy Coins</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sell Coins</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Create Ad</a>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="#" class="nav-link" (click) = "modal1.show()">Sign In</a>
+        </li>
+        <li>
+          <a href="#" class="nav-link" (click) = "modal2.show()">Sign Up</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container" style="margin-top: 35px;">
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <!-- Nav pills -->
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="pill" href="#buy-top-5">Buy Coin Top 5</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="pill" href="#sell-top-5">Sell Coin Top 5</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="buy-top-5" style="border: 1px solid red">
+          <div class="user" *ngFor = "let user of users">
+            <h4 style="margin: 0px">{{user.id + " " + user.username}}</h4>
+            <p>{{user.email}}</p>
+          </div>
+        </div>
+        <div class="tab-pane container" id="sell-top-5">
+          <h1>Sell top 5</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Login Modal-->
+<app-modal #modal1>
+  <div class="app-modal-header">
+    <h1 class="text-primary">Sign In</h1>
+  </div>
+  <div class="app-modal-body">
+    <div class="container" >
+      <div class="login-form">
+        <form (submit)="loginUser(user.value, pswd.value)">
+          <div class="form-group">
+            <label for="" class="sr-only">Username</label>
+            <input type="text" class="form-control" placeholder="Username" #user>
+          </div>
+          <div class="form-group">
+            <label for="" class="sr-only">Password</label>
+            <input type="password" class="form-control" placeholder="Password" #pswd>
+          </div>
+          <p>
+            Not registered yet? <a href="#" class="" (click)="modal2.show()">Sign Up</a>
+          </p>
+          <button type="submit" class="btn btn-primary" style="margin-left: 81%;">Sign In</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal1.hide()">Close</button>
+    <!-- <button type="submit" class="btn btn-primary">Sign In</button> -->
+  </div>
+</app-modal>
+
+<!--Register Modal-->
+<app-modal #modal2>
+  <div class="app-modal-header">
+    <h1 class="text-primary">Sign Up</h1>
+  </div>
+  <div class="app-modal-body">
+    <div class="container">
+      <div class="login-form">
+        <form #signupForm="ngForm" novalidate (ngSubmit)="registerUser(signupForm.value, signupForm.valid)">
+          <div class="form-group">
+            <label for="" class="sr-only">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Email Address"
+             [(ngModel)]="model.email" name="email" #email="ngModel" required>
+             <div [hidden]="email.valid||(email.pristine && !signupForm.submitted)" class="alert alert-danger">
+               Email is required
+             </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="sr-only">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Username"
+             [(ngModel)]="model.username" name="username" #username="ngModel" required>
+            <div [hidden]="username.valid||(username.pristine && !signupForm.submitted)" class="alert alert-danger">
+              Username is required
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="" class="sr-only">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password"
+             [(ngModel)]="model.password" name="passowrd" #password="ngModel" required 
+             validateEqual="confirmPassword" reverse="true">
+             <div [hidden]="password.valid||(password.pristine && !signupForm.submitted)" class="alert alert-danger">
+              Password is required
+             </div>
+          </div>
+
+          <div class="form-group">
+            <label for="" class="sr-only">Re-type Password</label>
+            <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="Re-type Password" required
+            [(ngModel)]="model.confirmPassword" #confirmPassword="ngModel" validateEqual="password" reverse="false">
+            <div [hidden]="confirmPassword.valid||(confirmPassword.pristine && !signupForm.submitted)" class="alert alert-danger">
+              Password mismatch
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="" class="sr-only">Country</label>
+            <input type="text" class="form-control" id="country" placeholder="Country"
+              [(ngModel)]="model.country" name="country" #country="ngModel" required>
+            <div [hidden]="country.valid||(country.pristine && !signupForm.submitted)" class="alert alert-danger">
+              Country is required   
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="" class="sr-only">Phone Number</label>
+            <input type="text" class="form-control" id="phone" placeholder="Phone Number"
+             [(ngModel)]="model.phone" name="phone" #phone="ngModel" required>
+            <div [hidden]="phone.valid||(phone.pristine && !signupForm.submitted)" class="alert alert-danger">
+              Phone number is required   
+            </div>
+          </div>
+
+          <button type="submit" [disabled]="!signupForm.form.valid" class="btn btn-primary">Sign Up</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="app-modal-footer">
+    <button type="button" class="btn btn-danger" (click)="modal2.hide()">Close</button>
+  </div>
+</app-modal>

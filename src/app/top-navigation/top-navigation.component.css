@@ -1,0 +1,11 @@
+#buy-top-5{
+    padding: 10px;
+    overflow-y: scroll;
+    max-height: 500px;
+}
+
+.user{
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #ececec;
+}
