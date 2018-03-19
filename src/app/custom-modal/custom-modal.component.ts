@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./custom-modal.component.css']
 })
 export class CustomModalComponent implements OnInit {
-
   public visible = false;
   private visibleAnimate = false;
 

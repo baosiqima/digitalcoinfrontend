@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomModalComponent } from '../custom-modal/custom-modal.component';
-
 import { User } from '../user';
-
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -12,26 +10,21 @@ import { DataService } from '../services/data.service';
 })
 export class TopNavigationComponent implements OnInit {
 
-  users: User[];
+
+  model=new User('','','','','','');
 
   brand: string = 'Digital Coins Exchange';
+  // leftLinks = ['Buy Coins', 'Sell Coins', 'Create a Trade Ad'];
+  // rightLinks = ['Sign in', 'Sign up', 'Choose Language'];
   dropdownLinks = ['English', 'Dutch', 'French', 'Italian'];
 
-  model = new User('test@test.com', 'test-user', '123', '123', 'India', '123456789');
-
-  submitted = false;
-
-  registerUser(model: User, isValid: boolean){
-    console.log('registerUser()');
-    console.log(model, isSecureContext);
-    this.submitted = true;
-  }
-
-  // TODO: Remove this when we're done
-  get diagnostic() { return JSON.stringify(this.model); }
-
-  constructor( private dataService: DataService ) {
-    console.log('Top Navigation Constructor');
+  constructor(private dataService: DataService) {
+    console.log('Constructor of Admin Panel')
+   }
+  registerUser(){
+    this.dataService.registerUser(this.model)
+    //   //this.posts = posts;
+    // console.log("user infoooooooooooo",this.model);
   }
 
   loginUser(username, password){
@@ -45,7 +38,7 @@ export class TopNavigationComponent implements OnInit {
       console.log('onInit of Top Navigation');
     
       console.log(users);
-      this.users = users;
+      // this.users = users;
     });
     // this.initializeUser();
     console.log(this.model);
@@ -57,5 +50,6 @@ export class TopNavigationComponent implements OnInit {
   }
 
 }
+
 
 

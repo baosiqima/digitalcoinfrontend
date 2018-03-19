@@ -7,6 +7,5 @@ export class User {
         public country: string,
         public phone: string
     ){
-
     }
 }
